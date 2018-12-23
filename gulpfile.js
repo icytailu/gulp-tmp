@@ -1,13 +1,5 @@
 const gulp = require("gulp");
 const $ = require("gulp-load-plugins")(); // 用于gulp-之类的 引用$.即可
-// const stylus = require("gulp-stylus");
-// const ejs = require("gulp-ejs");
-// const plumber = require("gulp-plumber");
-// const postcss = require("gulp-postcss");
-// const sourcemaps = require('gulp-sourcemaps');
-// const babel = require('gulp-babel');
-// const concat = require('gulp-concat');
-const mainBowerFiles = require("main-bower-files");
 const autoprefixer = require("autoprefixer");
 const browserSync = require("browser-sync").create();
 const minimist = require("minimist");
@@ -20,25 +12,21 @@ const envOptions = {
   }
 };
 const options = minimist(process.argv.slice(2), envOptions);
-console.log(options);
-
 gulp.task("clean", function() {
   return gulp.src(["./.tmp", "dist"], { read: false }).pipe($.clean());
 });
-gulp.task("ejs", () => {
+gulp.task("index", () => {
   return gulp
-    .src("src/*.ejs")
-    .pipe($.plumber())
-    .pipe(
-      $.ejs(
-        {
-          msg: "Hello Gulp!"
-        },
-        {},
-        { ext: ".html" }
-      )
-    )
+    .src("src/index.html")
+    .pipe($.plumber()) // 出错了也会继续执行
     .pipe(gulp.dest("dist"))
+    .pipe(browserSync.stream());
+});
+gulp.task("views", () => {
+  return gulp
+    .src("src/views/**/*")
+    .pipe($.plumber())
+    .pipe(gulp.dest("dist/views"))
     .pipe(browserSync.stream());
 });
 gulp.task("stylus", () => {
@@ -46,21 +34,24 @@ gulp.task("stylus", () => {
     autoprefixer({ browsers: ["last 3 version", ">5%", "ie 8"] })
   ];
   return gulp
-    .src("src/css/**/*")
+    .src("src/css/index.styl")
     .pipe($.plumber())
     .pipe($.sourcemaps.init())
     .pipe($.stylus())
     .pipe($.postcss(plugins))
     .pipe($.if(options.env === "production", $.minifyCss()))
     .pipe($.sourcemaps.write("."))
+
     .pipe(gulp.dest("dist/css"))
     .pipe(browserSync.stream());
 });
 gulp.task("img-min", () => {
   return gulp
     .src("src/imgs/**/*")
+    .pipe($.plumber())
     .pipe($.if(options.env === "production", $.imagemin()))
-    .pipe(gulp.dest("dist/imgs"));
+    .pipe(gulp.dest("dist/imgs"))
+    .pipe(browserSync.stream());
 });
 gulp.task("babel", () => {
   gulp
@@ -83,23 +74,12 @@ gulp.task("babel", () => {
     .pipe(gulp.dest("dist/js"))
     .pipe(browserSync.stream());
 });
-gulp.task("bower", () => {
-  return gulp.src(mainBowerFiles()).pipe(gulp.dest("./.tmp/vendors"));
-});
-gulp.task("vendorJs", ["bower"], () => {
-  //跑完bower 才能跑vendors
-  return gulp
-    .src("./.tmp/vendors")
-    .pipe($.concat("vendors.js"))
-    .pipe($.if(options.env === "production", $.uglify()))
-    .pipe(gulp.dest("dist/js"))
-    .pipe(browserSync.stream());
-});
-
 gulp.task("watch", () => {
+  gulp.watch("src/index.html", ["index"]);
+  gulp.watch("src/views/**/*", ["views"]);
   gulp.watch("src/css/**/*", ["stylus"]);
-  gulp.watch("./src/templates/**/*", ["ejs"]);
-  gulp.watch("./src/js/**/*", ["babel"]);
+  gulp.watch("src/imgs/**/**", ["img-min"]);
+  gulp.watch("src/js/**/*", ["babel"]);
 });
 gulp.task("brower-sync", () => {
   browserSync.init({
@@ -109,16 +89,16 @@ gulp.task("brower-sync", () => {
   });
 });
 gulp.task("default", [
-  "ejs",
-  "babel",
+  "clean",
+  "index",
+  "views",
   "stylus",
   "img-min",
-  "vendorJs",
+  "babel",
   "brower-sync",
   "watch"
 ]);
-
 gulp.task(
   "build",
-  sequence("clean", "stylus", "img-min", "ejs", "babel", "vendorJs")
+  sequence("clean", "img-min", "stylus", "babel", "index", "views")
 );

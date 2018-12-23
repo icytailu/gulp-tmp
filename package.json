@@ -1,11 +1,10 @@
 {
   "name": "gulp-demo",
   "version": "1.0.0",
-  "main": "index.js",
   "scripts": {
-    "dev": "gulp",
+    "dev": "gulp ",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "gulp clean && gulp revision && gulp build  && echo \"Sever Build Success ...\""
+    "build": "gulp build --env production"
   },
   "author": "",
   "license": "ISC",
@@ -18,7 +17,6 @@
     "gulp-babel": "^8.0.0",
     "gulp-clean": "^0.4.0",
     "gulp-concat": "^2.6.1",
-    "gulp-ejs": "^3.3.0",
     "gulp-if": "^2.0.2",
     "gulp-imagemin": "^5.0.3",
     "gulp-load-plugins": "^1.5.0",
@@ -29,7 +27,6 @@
     "gulp-sourcemaps": "^2.6.4",
     "gulp-stylus": "^2.7.0",
     "gulp-uglify": "^3.0.1",
-    "main-bower-files": "^2.13.1",
     "minimist": "^1.2.0"
   },
   "dependencies": {},
