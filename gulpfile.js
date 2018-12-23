@@ -13,7 +13,7 @@ const envOptions = {
 };
 const options = minimist(process.argv.slice(2), envOptions);
 gulp.task("clean", function() {
-  return gulp.src(["./.tmp", "dist"], { read: false }).pipe($.clean());
+  return gulp.src(["dist"], { read: false }).pipe($.clean());
 });
 gulp.task("index", () => {
   return gulp
