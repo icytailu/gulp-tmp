@@ -1,18 +1,44 @@
+
+@import './variable.styl'
+
+*, *:after, *:before
+  box-sizing border-box
+
+/* HTML5 hidden-attribute fix for newer browsers */
+*[hidden]
+  display none
+
+html, body
+  margin 0
+  padding 0
+  font-family $font-family
+  scroll-behavior smooth
+  line-height 1.15
+  -webkit-text-size-adjust 100%
+  -webkit-overflow-scrolling touch
+  -webkit-tap-highlight-color transparent
+
+::-webkit-input-placeholder
+  color $input-placeholder-color
+
+::-moz-placeholder
+  color $input-placeholder-color
+
+::-moz-placeholder
+  color $input-placeholder-color
+
+::-ms-input-placeholder
+  color $input-placeholder-color
+
 /* http://meyerweb.com/eric/tools/css/reset/
-   v4.0 | 20180602
-   License: none (public domain)
-*/
-html, body, div, span, iframe, h1, h2, h3, h4, h5, h6, p, pre, a, em, img, b, u, i, ol, ul, li, form, label, article, aside, canvas, footer, header, hgroup, menu, nav, output, ruby, section, summary, audio, video
+ */
+div, span, iframe, h1, h2, h3, h4, h5, h6, p, pre, a, em, img, b, u, i, ol, ul, li, form, label, article, aside, canvas, footer, header, hgroup, menu, nav, output, ruby, section, summary, audio, video
   margin 0
   padding 0
 
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section
   display block
-
-/* HTML5 hidden-attribute fix for newer browsers */
-*[hidden]
-  display none
 
 ol, ul
   list-style none
@@ -40,6 +66,9 @@ a
   background-color transparent
   text-decoration none
   color inherit
+
+  &:hover
+    transition all 0.5s
 
 /**
  * Add the correct font weight in Chrome, Edge, and Safari.
@@ -148,8 +177,5 @@ textarea
   -webkit-appearance button
   font inherit
 
-/**
- * Add the correct display in IE 10.
- */
-[hidden]
-  display none
+textarea, input
+  -webkit-appearance none

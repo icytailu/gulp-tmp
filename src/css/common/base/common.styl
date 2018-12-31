@@ -1,35 +1,19 @@
 @import './variable.styl'
 
-/**
- * 1. Correct the line height in all browsers.
- * 2. Prevent adjustments of font size after orientation changes in iOS.
- */
-html, body
-  font-family $font-family
-  scroll-behavior smooth
-  line-height 1.15
-  -webkit-text-size-adjust 100%
-  -webkit-overflow-scrolling touch
-  -webkit-tap-highlight-color transparent
+// 显示隐藏
+.show
+  display block !important
 
-::-webkit-input-placeholder
-  color $input-placeholder-color
+.hidden
+  display none !important
 
-::-moz-placeholder
-  color $input-placeholder-color
+.visibility-hidden
+  visibility hidden
 
-::-moz-placeholder
-  color $input-placeholder-color
+.visibility-visible
+  visibility visible
 
-::-ms-input-placeholder
-  color $input-placeholder-color
-
-textarea, input
-  -webkit-appearance none
-
-.fb
-  font-weight bold
-
+// flex布局
 .dfr
   display flex
   flex-direction row
@@ -37,6 +21,43 @@ textarea, input
 .dfc
   display flex
   flex-direction column
+
+.align-start
+  align-items flex-start
+
+.align-end
+  align-items flex-end
+
+.align-center
+  align-items center
+
+/* 弹性元素被在侧轴方向被拉伸到与容器相同的高度或宽度 */
+.align-stretch
+  align-items stretch
+
+.align-baseline
+  align-items baseline
+
+.justify-start
+  justify-content flex-start
+
+.justify-end
+  justify-content flex-end
+
+/* 均匀排列每个元素,首个元素放置于起点，末尾元素放置于终点 */
+.justify-between
+  justify-content space-between
+
+/* 均匀排列每个元素,每个元素周围分配相同的空间 */
+.justify-around
+  justify-content space-around
+
+/* 均匀排列每个元素,每个元素之间的间隔相等 */
+.justify-evenly
+  justify-content space-evenly
+
+.flex-wrap
+  flex-wrap wrap
 
 .flex-center
   align-items center
@@ -78,6 +99,9 @@ textarea, input
 
 .l-b
   border-left 0.01rem solid $single-border-color
+
+.fb
+  font-weight bold
 
 /* 颜色定义 */
 .bcfff

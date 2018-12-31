@@ -86,7 +86,7 @@ gulp.task("js", () => {
 gulp.task("watch", () => {
   gulp.watch("src/index.html", ["index-html"]);
   gulp.watch("src/view/**/*", ["view"]);
-  gulp.watch("src/css/common/*.styl", ["stylus"]);
+  gulp.watch("src/css/common/**/*.styl", ["stylus"]);
   gulp.watch("src/css/plugin/*.css", ["plugin-css"]);
   gulp.watch("src/img/**/**", ["img"]);
   gulp.watch("src/**/*.js", ["js"]);
