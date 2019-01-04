@@ -13,15 +13,6 @@
 .visibility-visible
   visibility visible
 
-// flex布局
-.dfr
-  display flex
-  flex-direction row
-
-.dfc
-  display flex
-  flex-direction column
-
 .align-start
   align-items flex-start
 
@@ -38,39 +29,14 @@
 .align-baseline
   align-items baseline
 
-.justify-start
-  justify-content flex-start
-
-.justify-end
-  justify-content flex-end
-
-/* 均匀排列每个元素,首个元素放置于起点，末尾元素放置于终点 */
-.justify-between
-  justify-content space-between
-
-/* 均匀排列每个元素,每个元素周围分配相同的空间 */
-.justify-around
-  justify-content space-around
-
-/* 均匀排列每个元素,每个元素之间的间隔相等 */
-.justify-evenly
-  justify-content space-evenly
-
-.flex-wrap
-  flex-wrap wrap
-
-.flex-center
-  align-items center
-  justify-content center
-
 // 定位
-.pos-re
+[data-position~='relative']
   position relative
 
-.pos-ab
+[data-position~='absolute']
   position absolute
 
-.pos-fix
+[data-position~='fixed']
   position fixed
 
 .t-c

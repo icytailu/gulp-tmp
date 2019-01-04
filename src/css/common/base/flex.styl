@@ -1,4 +1,4 @@
-// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝start
+
 [data-flex]
   display flex
   overflow hidden
@@ -22,13 +22,6 @@
 [data-flex~='column']
   flex-direction column
 
-// 间距
-[data-flex~='gutter']
-  margin -0.8em 0 0.8em -0.8em
-
-  & > [data-cell]
-    padding 0.8em 0 0 0.8em
-
 // 水平垂直居中
 [data-flex~='center']
   justify-content center
@@ -38,7 +31,10 @@
 [data-flex~='wrap']
   flex-wrap wrap
 
-// 主轴对齐方式
+/*
+ *******************************************************
+ 主轴对齐方式
+*/
 [data-flex~='main-start']
   justify-content flex-start
 
@@ -48,13 +44,22 @@
 [data-flex~='main-end']
   justify-content flex-end
 
+/* 均匀排列每个元素,首个元素放置于起点，末尾元素放置于终点 */
 [data-flex~='main-between']
   justify-content space-between
 
+/* 均匀排列每个元素,每个元素周围分配相同的空间 */
 [data-flex~='main-around']
   justify-content space-around
 
-// 交叉轴对齐方式
+/* 均匀排列每个元素,每个元素之间的间隔相等 */
+[data-flex~='main-evenly']
+  justify-content space-evenly
+
+/*
+ *******************************************************
+ 交叉轴对齐方式
+*/
 [data-flex~='cross-start']
   align-items flex-start
 
@@ -67,10 +72,14 @@
 [data-flex~='cross-baseline']
   align-items baseline
 
+/* 弹性元素被在侧轴方向被拉伸到与容器相同的高度或宽度 */
 [data-flex~='cross-stretch']
   align-items stretch
 
-// 多轴对齐方式
+/*
+ *******************************************************
+ 多轴对齐方式
+*/
 [data-flex~='start']
   align-content flex-start
 
@@ -89,7 +98,10 @@
 [data-flex~='stretch']
   align-content stretch
 
-// 元素自身对齐方式
+/*
+ *******************************************************
+ 元素自身对齐方式
+*/
 [data-cell~='start']
   align-self flex-start
 
@@ -105,7 +117,10 @@
 [data-cell~='stretch']
   align-self stretch
 
-// 固定宽度
+/*
+ *******************************************************
+ 固定宽度
+*/
 [data-cell~='1/2']
   width 50%
 
@@ -121,7 +136,10 @@
 [data-cell~='1/6']
   width 16.6666667%
 
-// 排序
+/*
+ *******************************************************
+ 排序
+*/
 [data-cell~='order1']
   order 1
 
@@ -152,7 +170,10 @@
 [data-cell~='order10']
   order 10
 
-// 响应式
+/*
+ *******************************************************
+ 响应式
+*/
 @media (max-width: 768px)
   [data-flex~='full']
     flex-wrap wrap
@@ -161,88 +182,3 @@
       flex-grow 0
       flex-shrink 0
       flex-basis 100%
-
-// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝end
-body
-  color #333
-  background-color #efeff4
-  line-height 1.6
-  font-family -apple-system-font, 'Helvetica Neue', sans-serif
-
-.p20
-  padding 20px
-
-.demo-flex li
-  list-style none
-
-.demo-flex h2
-  font-weight 600
-  font-size 1.333em
-  margin 0 0 1.12528em
-
-.demo-flex h3
-  margin 1.2em 0 0.8em
-
-.demo-flex h4, h5
-  margin 0.6em 0
-
-.box
-  margin 1em 0 2em 0
-
-.item
-  padding 10px
-  background hsla(31, 15%, 50%, 0.1)
-  border-radius 3px
-  text-align center
-
-[class$='face']
-  margin 16px
-  padding 4px
-  background-color #e7e7e7
-  width 104px
-  height 104px
-  object-fit contain
-  box-shadow inset 0 5px white, inset 0 -5px #bbb, inset 5px 0 #d7d7d7, inset -5px 0 #d7d7d7
-  border-radius 10%
-
-.pip
-  display block
-  width 24px
-  height 24px
-  border-radius 50%
-  margin 4px
-  background-color #333
-  box-shadow inset 0 3px #111, inset 0 -3px #555
-
-.holy-grail
-  min-height 500px
-  color #fff
-
-.holy-grail_hd
-  height 80px
-  background #5c747f
-
-.holy-grail_bd
-  background #34cfbe
-
-  &-left
-    background #32c5bd
-
-  &-center
-    background #483c6c
-
-  &-right
-    background #fe5e78
-
-.holy-grail_ft
-  height 80px
-  background #00675c
-
-.page-scroll-view
-  position absolute
-  left 0
-  right 0
-  top 0
-  bottom 0
-  overflow-y scroll
-  -webkit-overflow-scrolling touch
