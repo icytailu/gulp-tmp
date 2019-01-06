@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!-- 更加标准的 lang 属性写法  -->
+<html lang="zh-cmn-Hans">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="description" content="不超过150个字符" />
+    <meta name="keywords" content="" />
+    <meta name="robots" content="index,follow" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0, user-scalable=no"
+    />
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="msapplication-tap-highlight" content="no" />
+
+    <title>Document</title>
+    <link rel="stylesheet" href="../../css/plugin.css" />
+    <link rel="stylesheet" href="../../css/index.css" />
+  </head>
+  <body class="page2">
+    <header>
+      <h1>响应式图片</h1>
+      <picture>
+        <!-- 手机横屏 -->
+        <source
+          class="pic-responsive"
+          media="(min-width: 568px) and (max-width:767px)"
+          srcset="../../img/pig.jpg"
+        />
+        <!-- 手机竖屏 -->
+        <source
+          class="pic-responsive"
+          media="(max-width: 567px)"
+          srcset="../../img/husky.jpg"
+        />
+        <!-- ipad以及PC -->
+        <img
+          class="pic-responsive"
+          src="../../img/cat.jpg"
+          alt="Chris standing up holding his daughter Elva"
+        />
+      </picture>
+    </header>
+    <section class="demo"><ul class="demo-wrapper row"></ul></section>
+
+    <script src="../../js/index.js"></script>
+  </body>
+</html>
