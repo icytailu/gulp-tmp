@@ -1,0 +1,50 @@
+@media screen and (max-width: 767px) and (orientation: portrait)
+  #lock
+    display none !important
+
+@media screen and (max-width: 767px) and (orientation: landscape)
+  #main-content
+    display none !important
+
+@media screen and (min-width: 768px)
+  #lock
+    display none !important
+
+#lock
+  position absolute
+  width 100%
+  height 100%
+  overflow hidden
+  left 0
+  top 0
+  z-index 9999
+
+.lock
+  position absolute
+  left 50%
+  top 50%
+  width 250px
+  height 150px
+  transform translate(-50%, -50%)
+
+.lock .lock-tip
+  position relative
+  width 60%
+  transform rotate(-90deg)
+  animation easeIn 1.6s ease-in infinite
+
+@keyframes easeIn
+  0%
+    transform rotate(-90deg)
+
+  25%
+    transform rotate(0deg)
+
+  50%
+    transform rotate(0deg)
+
+  75%
+    transform rotate(-90deg)
+
+  100%
+    transform rotate(-90deg)
