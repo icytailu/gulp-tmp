@@ -45,7 +45,7 @@ gulp.task("stylus", () => {
     .pipe(browserSync.stream());
 });
 gulp.task("plugin-css", () => {
-  return merge(gulp.src("src/css/plugin/**.css"))
+  return merge(gulp.src("src/css/plugin-css/**/*.css"))
     .pipe($.concat("plugin.css"))
     .pipe(gulp.dest("dist/css"))
     .pipe(browserSync.stream());
