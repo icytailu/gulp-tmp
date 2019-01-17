@@ -44,9 +44,9 @@ gulp.task("stylus", () => {
     .pipe(gulp.dest("dist/css"))
     .pipe(browserSync.stream());
 });
-gulp.task("plugin-css", () => {
-  return merge(gulp.src("src/css/plugin-css/**/*.css"))
-    .pipe($.concat("plugin.css"))
+gulp.task("lib-css", () => {
+  return merge(gulp.src("src/css/lib/**.css"))
+    .pipe($.concat("lib.css"))
     .pipe(gulp.dest("dist/css"))
     .pipe(browserSync.stream());
 });
@@ -62,7 +62,7 @@ gulp.task("js", () => {
   return gulp
     .src([
       "src/js/base/*.js",
-      "src/js/common/*.js",
+      "src/js/lib/*.js",
       "src/js/index.js",
       "src/view/**/*.js"
     ])
@@ -87,7 +87,7 @@ gulp.task("watch", () => {
   gulp.watch("src/index.html", ["index-html"]);
   gulp.watch("src/view/**/*", ["view"]);
   gulp.watch("src/css/common/**/*.styl", ["stylus"]);
-  gulp.watch("src/css/plugin/*.css", ["plugin-css"]);
+  gulp.watch("src/css/lib/*.css", ["lib-css"]);
   gulp.watch("src/img/**/**", ["img"]);
   gulp.watch("src/**/*.js", ["js"]);
 });
@@ -102,7 +102,7 @@ gulp.task("default", ["clean"], () => {
   gulp.start(
     "index-html",
     "view",
-    "plugin-css",
+    "lib-css",
     "stylus",
     "js",
     "img",
@@ -111,5 +111,5 @@ gulp.task("default", ["clean"], () => {
   );
 });
 gulp.task("build", ["clean"], () => {
-  gulp.start("index-html", "view", "plugin-css", "stylus", "js", "img");
+  gulp.start("index-html", "view", "lib-css", "stylus", "js", "img");
 });
