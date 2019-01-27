@@ -92,7 +92,7 @@ gulp.task("sprite", function() {
         }
       })
     )
-    .pipe(gulp.dest(".temp")) //输出目录
+    .pipe(gulp.dest(".tmp")) //输出目录
     .pipe(browserSync.stream());
 });
 gulp.task("js", () => {
