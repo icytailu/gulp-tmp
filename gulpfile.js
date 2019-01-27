@@ -3,7 +3,6 @@ const $ = require("gulp-load-plugins")(); // 用于gulp-之类的 引用$.即可
 const autoprefixer = require("autoprefixer");
 const browserSync = require("browser-sync").create();
 const minimist = require("minimist");
-const merge = require("merge-stream");
 
 const envOptions = {
   string: "env",
@@ -34,7 +33,7 @@ gulp.task("stylus", () => {
     autoprefixer({ browsers: ["last 3 version", ">5%", "ie 8"] })
   ];
   return gulp
-    .src("src/css/common/index.styl")
+    .src("src/css/index.styl")
     .pipe($.plumber())
     .pipe($.if(options.env !== "production", $.sourcemaps.init()))
     .pipe($.stylus())
@@ -44,18 +43,56 @@ gulp.task("stylus", () => {
     .pipe(gulp.dest("dist/css"))
     .pipe(browserSync.stream());
 });
-gulp.task("lib-css", () => {
-  return merge(gulp.src("src/css/lib/**.css"))
-    .pipe($.concat("lib.css"))
-    .pipe(gulp.dest("dist/css"))
-    .pipe(browserSync.stream());
-});
+
 gulp.task("img", () => {
   return gulp
-    .src("src/img/**/*")
+    .src("src/img/*")
     .pipe($.plumber())
     .pipe($.if(options.env === "production", $.imagemin()))
     .pipe(gulp.dest("dist/img"))
+    .pipe(browserSync.stream());
+});
+//引入雪碧图合成插件
+gulp.task("sprite", function() {
+  gulp
+    .src("src/img/icon/*.png")
+    .pipe(
+      spritesmith({
+        imgName: "img/sprite.png", //保存合并后的名称
+        cssName: "css/sprite.css", //保存合并后css样式的地址
+        padding: 2, //合并时两个图片的间距
+        cssTemplate: function(data) {
+          //如果是函数的话，这可以这样写
+          var arr = [];
+          data.sprites.forEach(function(sprite) {
+            arr.push(
+              ".icon-" +
+                sprite.name +
+                "{" +
+                "display:block;" +
+                "background-image: url('" +
+                sprite.escaped_image +
+                "');" +
+                "background-repeat: no-repeat;" +
+                "background-position: " +
+                sprite.px.offset_x +
+                " " +
+                sprite.px.offset_y +
+                ";" +
+                "width: " +
+                sprite.px.width +
+                ";" +
+                "height: " +
+                sprite.px.height +
+                ";" +
+                "}\n"
+            );
+          });
+          return arr.join("");
+        }
+      })
+    )
+    .pipe(gulp.dest(".temp")) //输出目录
     .pipe(browserSync.stream());
 });
 gulp.task("js", () => {
@@ -86,8 +123,7 @@ gulp.task("js", () => {
 gulp.task("watch", () => {
   gulp.watch("src/index.html", ["index-html"]);
   gulp.watch("src/view/**/*", ["view"]);
-  gulp.watch("src/css/common/**/*.styl", ["stylus"]);
-  gulp.watch("src/css/lib/*.css", ["lib-css"]);
+  gulp.watch("src/css/**/*.styl", ["stylus"]);
   gulp.watch("src/img/**/**", ["img"]);
   gulp.watch("src/**/*.js", ["js"]);
 });
@@ -102,7 +138,6 @@ gulp.task("default", ["clean"], () => {
   gulp.start(
     "index-html",
     "view",
-    "lib-css",
     "stylus",
     "js",
     "img",
@@ -111,5 +146,5 @@ gulp.task("default", ["clean"], () => {
   );
 });
 gulp.task("build", ["clean"], () => {
-  gulp.start("index-html", "view", "lib-css", "stylus", "js", "img");
+  gulp.start("index-html", "view", "stylus", "js", "img");
 });

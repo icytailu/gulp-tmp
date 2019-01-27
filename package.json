@@ -23,7 +23,7 @@
     "gulp-sourcemaps": "^2.6.4",
     "gulp-stylus": "^2.7.0",
     "gulp-uglify": "^3.0.1",
-    "merge-stream": "^1.0.1",
+    "gulp.spritesmith": "^6.9.0",
     "minimist": "^1.2.0"
   },
   "dependencies": {},
